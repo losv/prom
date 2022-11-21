@@ -1,0 +1,24 @@
+upstream backend2 {
+        server 127.0.0.1:8080;
+}
+
+
+
+server {
+    server_name cablingsystems.ru www.cablingsystems.ru;
+   # access_log /var/log/nginx/blog.zeroxzed.ru-access.log;
+   # error_log /var/log/nginx/blog.zeroxzed.ru-error.log;
+
+
+
+
+location / {
+    proxy_pass http://backend2;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Real-IP $remote_addr;
+    }
+
+
+
+}
